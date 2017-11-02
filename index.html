@@ -4,18 +4,18 @@
 <style> 
 </style>
 <script>
-function myFunction(str) {
+function fun(str) {
     if (str.length == 0) { 
-        document.getElementById("txtHint").innerHTML = "";
+        document.getElementById("take").innerHTML = "";
         return;
     } else {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
+                document.getElementById("take").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET", "request2.php?q=" + str, true);
+        xmlhttp.open("GET", "request.php?q=" + str, true);
         xmlhttp.send();
     }
 }
@@ -27,8 +27,8 @@ window.onload = function () {
          var httpRequest = new XMLHttpRequest(); 
  
  
-         // GET Request 
-         var url = "request2.php"; 
+        
+         var url = "request.php"; 
          httpRequest.onreadystatechange = getXml; 
          httpRequest.open('GET', url); 
          httpRequest.send(); 
@@ -41,7 +41,7 @@ window.onload = function () {
                  // when we are expecting XML data. 
                  var response = httpRequest.responseXML; 
                  console.log(response);
-                 var results = document.querySelector('#txtHint'); 
+                 var results = document.querySelector('#take'); 
                  var people = response.getElementsByTagName('definition'); 
  
  
@@ -58,7 +58,7 @@ window.onload = function () {
                      list.appendChild(person); 
                  } 
                } else { 
-                 alert('There was a problem with the request.'); 
+                 alert('Request error'); 
                } 
              } 
          } 
@@ -71,13 +71,13 @@ window.onload = function () {
 
 
 
-<form name="MyForm">
-  <input type="text" name="search" placeholder="Search..">
+<form name="origin">
+  <input type="text" name="search" placeholder="Search">
 </form>
     <br />
-<Button onclick=myFunction(document.forms["MyForm"]["search"].value)>Submit</Button>
+<Button onclick=fun(document.forms["origin"]["search"].value)>Submit</Button>
 <Button id="getXml" class="btn">Get All Definitions</Button>
-<div id="txtHint"></div>
+<div id="take"></div>
 
 
 
